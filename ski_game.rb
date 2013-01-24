@@ -21,6 +21,7 @@ class SkiGame
     @height = height
     @skier = Skier.new(@width / 5, @height - 5)
     @trees = [Tree.new(30, 3)]
+    @score = 0
     reset_speed
   end
 
@@ -59,12 +60,13 @@ class SkiGame
   end
 
   def tick
-    reset_speed
     check_collision
     move_trees
     cleanup_trees
     spawn_trees
+    increase_score
     increase_tick_count
+    reset_speed
   end
 
   def move_trees
@@ -104,6 +106,10 @@ class SkiGame
       y.between?(1, @height - 2)
   end
 
+  def increase_score
+    @score += 0.7 + @speed * 0.5
+  end
+
   def increase_tick_count
     @ticks += 1
   end
@@ -112,8 +118,16 @@ class SkiGame
     0.05 - @speed * 0.05
   end
 
+  def textbox_content
+    "Your distance: %dm" % @score
+  end
+
   def exit
     Kernel.exit
+  end
+
+  def exit_message
+    puts "You're dead ;(. You rode %d meters down the hill though!" % @score
   end
 end
 

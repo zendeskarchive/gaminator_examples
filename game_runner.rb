@@ -12,12 +12,17 @@ class GameRunner
     stdscr.nodelay = 1
     curs_set(0)
 
-    @width = cols
-    @height = lines
-    @win = Window.new(@height, @width, 0, 0)
-    @win.box("|", "-")
+    @plane_width = cols
+    @plane_height = lines - 5
+    @plane = Window.new(@plane_height, @plane_width, 0, 0)
+    @plane.box("|", "-")
 
-    @game = game_class.new(@width - 2, @height - 2)
+    @textbox_width = cols
+    @textbox_height = 5
+    @textbox = Window.new(@textbox_height, @textbox_width, @plane_height, 0)
+    @textbox.box("|", "-")
+
+    @game = game_class.new(@plane_width - 2, @plane_height - 2)
   end
 
   def run
@@ -27,14 +32,20 @@ class GameRunner
         handle_input
 
         render_objects
+        render_textbox
 
-        @win.refresh
-        clear_window
+        @plane.refresh
+        @textbox.refresh
+
+        clear_plane
+        clear_textbox
 
         sleep(@game.sleep_time)
       end
     ensure
       close_screen
+      puts
+      puts @game.exit_message
     end
   end
 
@@ -52,16 +63,30 @@ class GameRunner
 
   def render_objects
     @game.objects.each do |object|
-      @win.setpos(object.y + 1, object.x + 1)
-      @win.addstr(object.char)
+      @plane.setpos(object.y + 1, object.x + 1)
+      @plane.addstr(object.char)
     end
   end
 
-  def clear_window
-    1.upto(@height - 2) do |y|
-      1.upto(@width - 2) do |x|
-        @win.setpos(y, x)
-        @win.addstr(" ")
+  def render_textbox
+    @textbox.setpos(2, 3)
+    @textbox.addstr(@game.textbox_content)
+  end
+
+  def clear_plane
+    1.upto(@plane_height - 2) do |y|
+      1.upto(@plane_width - 2) do |x|
+        @plane.setpos(y, x)
+        @plane.addstr(" ")
+      end
+    end
+  end
+
+  def clear_textbox
+    1.upto(@textbox_height - 2) do |y|
+      1.upto(@textbox_width - 2) do |x|
+        @textbox.setpos(y, x)
+        @textbox.addstr(" ")
       end
     end
   end
