@@ -7,6 +7,10 @@ class SkiGame
     def char
       "#"
     end
+
+    def color
+      Curses::COLOR_GREEN
+    end
   end
 
   class Skier < Struct.new(:x, :y)

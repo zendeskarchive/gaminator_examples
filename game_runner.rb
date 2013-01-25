@@ -7,10 +7,18 @@ class GameRunner
 
   def initialize(game_class)
     init_screen
+    start_color
     cbreak
     noecho
     stdscr.nodelay = 1
     curs_set(0)
+
+    [
+      COLOR_WHITE, COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_CYAN,
+      COLOR_MAGENTA, COLOR_YELLOW
+    ].each do |color|
+      init_pair(color, color, COLOR_BLACK)
+    end
 
     @plane_width = cols
     @plane_height = lines - 5
@@ -64,7 +72,12 @@ class GameRunner
   def render_objects
     @game.objects.each do |object|
       @plane.setpos(object.y + 1, object.x + 1)
-      @plane.addstr(object.char)
+
+      color = object.respond_to?(:color) ? object.color : COLOR_WHITE
+
+      @plane.attron(color_pair(color) | A_NORMAL) do
+        @plane.addstr(object.char)
+      end
     end
   end
 
