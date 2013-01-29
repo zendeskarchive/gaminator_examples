@@ -71,12 +71,20 @@ class GameRunner
 
   def render_objects
     @game.objects.each do |object|
-      @plane.setpos(object.y + 1, object.x + 1)
-
       color = object.respond_to?(:color) ? object.color : COLOR_WHITE
 
-      @plane.attron(color_pair(color) | A_NORMAL) do
-        @plane.addstr(object.char)
+      if object.respond_to?(:texture)
+        object.texture.each.with_index do |row,index|
+          @plane.setpos(object.y + 1 + index, object.x + 1)
+          @plane.attron(color_pair(color) | A_NORMAL) do
+            @plane.addstr(row)
+          end
+        end
+      else
+        @plane.setpos(object.y + 1, object.x + 1)
+        @plane.attron(color_pair(color) | A_NORMAL) do
+          @plane.addstr(object.char)
+        end
       end
     end
   end
