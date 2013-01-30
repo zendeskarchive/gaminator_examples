@@ -92,10 +92,19 @@ class GameRunner
       color = object.respond_to?(:color) ? object.color : COLOR_WHITE
 
       if object.respond_to?(:texture)
-        object.texture.each.with_index do |row,index|
-          @plane.setpos(object.y + 1 + index, object.x + 1)
-          @plane.attron(color_pair(color) | A_NORMAL) do
-            @plane.addstr(row)
+        object.texture.each.with_index do |row,row_index|
+          row.each_char.with_index do |pixel,pixel_index|
+            x = object.x + 1 + pixel_index
+            y = object.y + 1 + row_index
+            next if x < 1 || x >= @plane_width
+            next if y < 1 || y >= @plane_height
+            if object.respond_to?(:colors) && object.colors
+              color = object.colors[row_index][pixel_index]
+            end
+            @plane.setpos(y,x)
+            @plane.attron(color_pair(color) | A_NORMAL) do
+              @plane.addstr(pixel)
+            end
           end
         end
       else
