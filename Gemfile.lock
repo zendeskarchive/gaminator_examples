@@ -1,5 +1,6 @@
-PATH
-  remote: ../gaminator
+GIT
+  remote: git://github.com/futuresimple/gaminator.git
+  revision: 9eabacfbea37669dd94e9d5f7df293609b94d96b
   specs:
     gaminator (0.0.5)
 
