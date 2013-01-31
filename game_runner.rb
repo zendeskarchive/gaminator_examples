@@ -20,6 +20,7 @@ require "curses"
 # * y - the y position of the object
 # * char - the text representation of the object
 # * color (optional) - the color of the object
+
 class GameRunner
   include Curses
 
@@ -89,28 +90,31 @@ class GameRunner
 
   def render_objects
     @game.objects.each do |object|
-      color = object.respond_to?(:color) ? object.color : COLOR_WHITE
+      render_object(object)
+    end
+  end
 
-      if object.respond_to?(:texture)
-        object.texture.each.with_index do |row,row_index|
-          row.each_char.with_index do |pixel,pixel_index|
-            x = object.x + 1 + pixel_index
-            y = object.y + 1 + row_index
-            next if x < 1 || x >= @plane_width
-            next if y < 1 || y >= @plane_height
-            if object.respond_to?(:colors) && object.colors
-              color = object.colors[row_index][pixel_index]
-            end
-            @plane.setpos(y,x)
-            @plane.attron(color_pair(color) | A_NORMAL) do
-              @plane.addstr(pixel)
-            end
-          end
+  private
+
+  def render_object(object)
+    color = object.respond_to?(:color) ? object.color : COLOR_WHITE
+    texture = object.texture if object.respond_to?(:texture)
+    texture ||= [object.char]
+
+    texture.each.with_index do |row,row_index|
+      row.each_char.with_index do |pixel,pixel_index|
+        x = object.x + 1 + pixel_index
+        y = object.y + 1 + row_index
+        next if x < 1 || x >= @plane_width
+        next if y < 1 || y >= @plane_height
+
+        if object.respond_to?(:colors) && object.colors
+          color = object.colors[row_index][pixel_index]
         end
-      else
-        @plane.setpos(object.y + 1, object.x + 1)
+
+        @plane.setpos(y,x)
         @plane.attron(color_pair(color) | A_NORMAL) do
-          @plane.addstr(object.char)
+          @plane.addstr(pixel)
         end
       end
     end
