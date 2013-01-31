@@ -76,6 +76,8 @@ class GameRunner
     end
   end
 
+  private
+
   def handle_input
     char = getch
     action = @game.input_map[char]
@@ -93,8 +95,6 @@ class GameRunner
       render_object(object)
     end
   end
-
-  private
 
   def render_object(object)
     color = object.respond_to?(:color) ? object.color : COLOR_WHITE
