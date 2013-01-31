@@ -1,4 +1,5 @@
-require_relative 'game_runner'
+require 'bundler/setup'
+require 'gaminator'
 
 class Entity
   attr_accessor :x, :y, :texture, :color, :colors
@@ -96,4 +97,4 @@ class HouseGame
   end
 end
 
-GameRunner.new(HouseGame).run
+Gaminator::Runner.new(HouseGame).run
