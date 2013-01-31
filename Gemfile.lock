@@ -1,9 +1,7 @@
-GIT
-  remote: git://github.com/futuresimple/gaminator.git
-  revision: caa4dbf04bc12d695be389efbda04ad379736b64
-  tag: 0.0.2
+PATH
+  remote: ../gaminator
   specs:
-    gaminator (0.0.2)
+    gaminator (0.0.4)
 
 GEM
   specs:

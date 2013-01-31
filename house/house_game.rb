@@ -47,6 +47,10 @@ class HouseGame
     ]
   end
 
+  def wait?
+    true
+  end
+
   def objects
     @entities
   end

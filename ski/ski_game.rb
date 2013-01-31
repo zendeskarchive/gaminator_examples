@@ -34,6 +34,10 @@ class SkiGame
     @speed = 0
   end
 
+  def wait?
+    false
+  end
+
   def objects
     [@skier] + @trees
   end

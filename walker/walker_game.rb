@@ -121,6 +121,10 @@ class WalkerGame
     reset_speed
   end
 
+  def wait?
+    true
+  end
+
   def reset_speed
     @speed = 0
   end
