@@ -1,4 +1,5 @@
-require_relative 'game_runner'
+require "bundler/setup"
+require "gaminator"
 
 class Entity
   attr_accessor :x, :y, :texture, :color, :colors
@@ -13,7 +14,7 @@ class Entity
   }
   SHORT_COLOR_MAP = Hash[COLOR_MAP.map{|k,v| [k.to_s[0],v]}]
 
-  PATH = "data/"
+  PATH = File.join(File.dirname(__FILE__), "data/")
   TEXTURE_EXT = ".txt"
   COLORS_EXT = ".col"
 
@@ -96,4 +97,4 @@ class HouseGame
   end
 end
 
-GameRunner.new(HouseGame).run
+Gaminator::Runner.new(HouseGame).run
