@@ -1,6 +1,7 @@
 # encoding: utf-8
 
-require "../game_runner"
+require "bundler/setup"
+require "gaminator"
 
 class SkiGame
   class Tree < Struct.new(:x, :y)
@@ -136,4 +137,4 @@ class SkiGame
 end
 
 
-GameRunner.new(SkiGame).run
+Gaminator::Runner.new(SkiGame).run

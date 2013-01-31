@@ -1,6 +1,7 @@
 # encoding: utf-8
 
-require "../game_runner"
+require "bundler/setup"
+require "gaminator"
 
 class WalkerGame
   class Player < Struct.new(:x, :y)
@@ -113,7 +114,7 @@ class WalkerGame
     @height = height
     @score = 0
     @map = Map.new
-    @map.load_map "map.txt"
+    @map.load_map File.join(File.dirname(__FILE__), "map.txt")
     puts @map.types.keys
     start = @map.types['Start'].first
     @player = Player.new(start.x,start.y)
@@ -194,4 +195,4 @@ class WalkerGame
 
 end
 
-GameRunner.new(WalkerGame).run
+Gaminator::Runner.new(WalkerGame).run
