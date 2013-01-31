@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require "./game_runner"
+require "../game_runner"
 
 class SkiGame
   class Tree < Struct.new(:x, :y)

@@ -1,12 +1,9 @@
 # encoding: utf-8
 
-require "./game_runner"
+require "../game_runner"
 
 class WalkerGame
-
-
   class Player < Struct.new(:x, :y)
-
     def char
       "@"
     end
@@ -19,11 +16,9 @@ class WalkerGame
       self.x+=x
       self.y+=y
     end
-
   end
 
   class Item < Struct.new(:x, :y)
-
     def blocking?
       false
     end
@@ -31,11 +26,9 @@ class WalkerGame
     def winning?
       false
     end
-
   end
 
   class Wall < Item
-
     def char
       '#'
     end
@@ -43,11 +36,9 @@ class WalkerGame
     def blocking?
       true
     end
-
   end
 
   class Finish < Item
-
     def char
       'F'
     end
@@ -56,18 +47,18 @@ class WalkerGame
       true
     end
 
+    def color
+      Curses::COLOR_BLUE
+    end
   end
 
   class Start < Item
-
     def char
       ''
     end
-
   end
 
   class Map < Hash
-
     attr_accessor :types
 
     OBJECT_MAPPING = {
@@ -114,7 +105,6 @@ class WalkerGame
     def objects
       @objects
     end
-
   end
 
   def initialize(width, height)
@@ -205,4 +195,3 @@ class WalkerGame
 end
 
 GameRunner.new(WalkerGame).run
-
