@@ -136,9 +136,9 @@ class SkiGame
   end
 
   def exit_message
-    puts "You're dead ;(. You rode %d meters down the hill though!" % @score
+    "You're dead ;(. You rode %d meters down the hill though!" % @score
   end
 end
 
 
-Gaminator::Runner.new(SkiGame).run
+Gaminator::Runner.new(SkiGame, :rows => 30, :cols => 80).run
