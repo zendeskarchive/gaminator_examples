@@ -139,10 +139,10 @@ class WalkerGame
 
   def input_map
     {
-      ?a => :move_left,
-      ?w => :move_top,
-      ?s => :move_down,
-      ?d => :move_right
+      "a" => :move_left,
+      "w" => :move_top,
+      "s" => :move_down,
+      "d" => :move_right
     }
   end
 

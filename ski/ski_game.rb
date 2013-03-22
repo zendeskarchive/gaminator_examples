@@ -44,11 +44,11 @@ class SkiGame
 
   def input_map
     {
-      ?a => :move_left,
-      ?d => :move_right,
-      ?w => :speed_up,
-      ?s => :slow_down,
-      ?q => :exit,
+      "a" => :move_left,
+      "d" => :move_right,
+      "w" => :speed_up,
+      "s" => :slow_down,
+      "q" => :exit,
     }
   end
 

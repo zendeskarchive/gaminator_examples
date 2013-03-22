@@ -57,11 +57,11 @@ class HouseGame
 
   def input_map
     {
-      ?j => :move_left,
-      ?l => :move_right,
-      ?i => :move_up,
-      ?k => :move_down,
-      ?q => :exit,
+      "j" => :move_left,
+      "l" => :move_right,
+      "i" => :move_up,
+      "k" => :move_down,
+      "q" => :exit,
     }
   end
 
