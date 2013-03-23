@@ -1,14 +1,10 @@
-GIT
-  remote: git://github.com/futuresimple/gaminator.git
-  revision: 9eabacfbea37669dd94e9d5f7df293609b94d96b
+GEM
+  remote: https://rubygems.org/
   specs:
     gaminator (0.0.5)
-
-GEM
-  specs:
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  gaminator!
+  gaminator

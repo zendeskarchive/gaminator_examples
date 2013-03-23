@@ -1,1 +1,3 @@
-gem "gaminator", :git => "git://github.com/futuresimple/gaminator.git"
+source "https://rubygems.org"
+
+gem "gaminator"
